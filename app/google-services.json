@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "638977458300",
+    "firebase_url": "https://sdkapp-48944.firebaseio.com",
+    "project_id": "sdkapp-48944",
+    "storage_bucket": "sdkapp-48944.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638977458300:android:72e3204f4dea27faed09f9",
+        "android_client_info": {
+          "package_name": "com.sdr.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638977458300-lm466m44eovf64qc9kb784tcagmn7tbr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sdr.android",
+            "certificate_hash": "3257089e29c08faa0993807bf893177ef81c9383"
+          }
+        },
+        {
+          "client_id": "638977458300-kavjge8vd1ouqrevqfqq5gq6990b7l4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH0nIrfd6xD6ZN1ObG22N2SiJIZKYiJW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638977458300-kavjge8vd1ouqrevqfqq5gq6990b7l4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
