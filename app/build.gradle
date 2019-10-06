@@ -39,6 +39,9 @@ dependencies {
     implementation 'io.paperdb:paperdb:2.6'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.firebase:firebase-analytics:17.0.1'
