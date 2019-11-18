@@ -1,4 +1,4 @@
-package com.sdr.android;
+package com.sdr.android.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,8 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sdr.android.Admin.AdminHomeActivity;
+import com.sdr.android.Sellers.SellerProductCategoryActivity;
 import com.sdr.android.Model.Users;
 import com.sdr.android.Prevalent.Prevalent;
+import com.sdr.android.R;
 
 import io.paperdb.Paper;
 
@@ -32,7 +34,7 @@ public class loginActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private String parentDbName = "Users";
     private CheckBox chkBoxRememberMe;
-    private TextView AdminLink, NotAdminLink;
+    private TextView AdminLink, NotAdminLink, ForgotPasswordLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class loginActivity extends AppCompatActivity {
 
         AdminLink = (TextView) findViewById(R.id.admin_panel_link);
         NotAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
+        ForgotPasswordLink = (TextView) findViewById(R.id.forget_password_link);
 
         LoginButton = (Button) findViewById(R.id.login_btn);
         InputPhoneNumber = (EditText) findViewById(R.id.login_phone_number_input);
@@ -77,6 +80,15 @@ public class loginActivity extends AppCompatActivity {
                 AdminLink.setVisibility(View.VISIBLE);
                 NotAdminLink.setVisibility(View.INVISIBLE);
                 parentDbName = "Users";
+            }
+        });
+
+        ForgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(loginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("check", "login");
+                startActivity(intent);
             }
         });
 
@@ -136,7 +148,7 @@ public class loginActivity extends AppCompatActivity {
                                 Toast.makeText(loginActivity.this, "Welcome Admin, You are Logged In Successfully!", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
-                                Intent intent = new Intent(loginActivity.this, AdminCategoryActivity.class);
+                                Intent intent = new Intent(loginActivity.this, AdminHomeActivity.class);
                                 startActivity(intent);
                             }
                             else if(parentDbName.equals("Users")){

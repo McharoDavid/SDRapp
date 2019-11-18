@@ -1,13 +1,11 @@
-package com.sdr.android;
+package com.sdr.android.Buyers;
 
 import android.content.Intent;
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +19,10 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sdr.android.Admin.AdminMaintainProductsActivity;
 import com.sdr.android.Model.Products;
 import com.sdr.android.Prevalent.Prevalent;
+import com.sdr.android.R;
 import com.sdr.android.ViewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -46,12 +46,19 @@ public class HomeActivity extends AppCompatActivity
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            type = getIntent().getExtras().get("Admin").toString();
+        }
 
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -61,14 +68,24 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                if(!type.equals("Admin")){
+
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
+
+                }
+
+
             }
         });
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,8 +98,10 @@ public class HomeActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
-        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile);
+        if(!type.equals("Admin")){
+            userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile);
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -97,7 +116,7 @@ public class HomeActivity extends AppCompatActivity
         super.onStart();
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef, Products.class).build();
+                .setQuery(ProductsRef.orderByChild("productState").equalTo("Approved"), Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -115,9 +134,21 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view) {
 
-                        Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                        intent.putExtra("pid", model.getPid());
-                        startActivity(intent);
+
+                        if(type.equals("Admin")){
+
+                            Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
+                            intent.putExtra("pid", model.getPid());
+                            startActivity(intent);
+
+                        }
+                        else{
+                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                            intent.putExtra("pid", model.getPid());
+                            startActivity(intent);
+                        }
+
+
 
                     }
                 });
@@ -181,27 +212,50 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_cart) {
 
+            if(!type.equals("Admin")){
+
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+
+            }
+
+
+
         }
-        else if (id == R.id.nav_orders) {
+        else if (id == R.id.nav_search) {
+            Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+            intent.putExtra("Admin", type);
+            startActivity(intent);
 
         }
         else if (id == R.id.nav_categories) {
 
         }
         else if (id == R.id.nav_settings) {
+            if(!type.equals("Admin")){
 
-            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                startActivity(intent);
+
+            }
+
+
 
         }
         else if (id == R.id.nav_logout) {
 
-            Paper.book().destroy();
+            if(!type.equals("Admin")){
 
-            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+                Paper.book().destroy();
+
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
+
+
 
         }
 

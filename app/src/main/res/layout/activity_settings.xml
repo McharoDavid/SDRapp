@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".Buyers.SettingsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_settings"
@@ -114,6 +114,20 @@
         android:hint="Password..."
         android:layout_margin="15dp"
         android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/security_questions_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settings_password"
+        android:text="Set Security Questions"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:background="@drawable/buttons"
         />
 
 </RelativeLayout>

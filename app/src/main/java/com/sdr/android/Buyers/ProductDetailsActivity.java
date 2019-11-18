@@ -1,4 +1,4 @@
-package com.sdr.android;
+package com.sdr.android.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdr.android.Model.Products;
 import com.sdr.android.Prevalent.Prevalent;
+import com.sdr.android.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private ElegantNumberButton numberButton;
     private TextView productPrice, productDescription, productName;
-    private String productID = "";
+    private String productID = "", state = "Normal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,27 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                addToCartList();
+
+
+                if(state.equals("Order Placed") || state.equals("Order Shipped")){
+
+                    Toast.makeText(ProductDetailsActivity.this, "You can add or purchase more products once your last order has been shipped.", Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    addToCartList();
+                }
 
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        CheckOrderState();
     }
 
     private void addToCartList() {
@@ -141,6 +157,47 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
-
     }
+
+    private void CheckOrderState(){
+
+        DatabaseReference ordersRef;
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+
+        ordersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+
+                    String shippingState = dataSnapshot.child("state").getValue().toString();
+
+
+                    if(shippingState.equals("shipped")){
+
+                        state = "Order Shipped";
+
+
+                    }
+                    else if(shippingState.equals("not shipped")){
+
+
+                        state = "Order Placed";
+
+
+                    }
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
