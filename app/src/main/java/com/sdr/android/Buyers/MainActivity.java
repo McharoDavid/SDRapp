@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.sdr.android.Model.Users;
 import com.sdr.android.Prevalent.Prevalent;
 import com.sdr.android.R;
-import com.sdr.android.Sellers.SellerHomeActivity;
 import com.sdr.android.Sellers.SellerRegistrationActivity;
 
 import io.paperdb.Paper;

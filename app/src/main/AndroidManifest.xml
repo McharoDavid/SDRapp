@@ -14,9 +14,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Admin.AdminCheckNewProductsActivity"></activity>
         <activity android:name=".Admin.AdminHomeActivity" />
-        <activity
-            android:name=".Sellers.SellerHomeActivity"
-            android:label="@string/title_activity_seller_home" />
         <activity android:name=".Sellers.SellerLoginActivity" />
         <activity android:name=".Sellers.SellerRegistrationActivity" />
         <activity android:name=".Buyers.ResetPasswordActivity" />
