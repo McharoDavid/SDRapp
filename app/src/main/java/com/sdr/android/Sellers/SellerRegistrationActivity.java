@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,50 +70,56 @@ public class SellerRegistrationActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
         final String address = addressInput.getText().toString();
 
-        if(!name.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") && !email.equals("")){
+        if(!name.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") && !address.equals("")){
 
-            loadingBar.setTitle("Creating Seller Account");
-            loadingBar.setMessage("Please wait while we are checking the credentials.");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
+            if(password.length() >= 6){
+                loadingBar.setTitle("Creating Seller Account");
+                loadingBar.setMessage("Please wait while we are checking the credentials.");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        final DatabaseReference rootRef;
-                        rootRef= FirebaseDatabase.getInstance().getReference();
-
-                        String sID = mAuth.getCurrentUser().getUid();
-
-                        HashMap<String, Object> sellerMap = new HashMap<>();
-                        sellerMap.put("sid", sID);
-                        sellerMap.put("name", name);
-                        sellerMap.put("phone", phone);
-                        sellerMap.put("email", email);
-                        sellerMap.put("address", address);
-
-                        rootRef.child("Sellers").child(sID).updateChildren(sellerMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+                            public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    loadingBar.dismiss();
-                                    Toast.makeText(SellerRegistrationActivity.this, "You have been registered Successfully.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
-                                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
-                                    finish();
+                                    final DatabaseReference rootRef;
+                                    rootRef= FirebaseDatabase.getInstance().getReference();
+
+                                    String sID = mAuth.getCurrentUser().getUid();
+
+                                    HashMap<String, Object> sellerMap = new HashMap<>();
+                                    sellerMap.put("sid", sID);
+                                    sellerMap.put("name", name);
+                                    sellerMap.put("phone", phone);
+                                    sellerMap.put("email", email);
+                                    sellerMap.put("address", address);
+
+                                    rootRef.child("Sellers").child(sID).updateChildren(sellerMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                loadingBar.dismiss();
+                                                Toast.makeText(SellerRegistrationActivity.this, "You have been registered Successfully.", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
+                                                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    });
+                                }
+                                else{
+                                    Toast.makeText(SellerRegistrationActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                    Log.d("yuu", "Error: " + task.getException());
                                 }
                             }
                         });
+            }
+            else{
+                Toast.makeText(this, "Password must contain 6 or more characters.", Toast.LENGTH_SHORT).show();
+            }
 
-
-                    }
-                }
-            });
-
-            
         }
         else{
             Toast.makeText(this, "Please Complete Filling Out The Registration Form.", Toast.LENGTH_SHORT).show();

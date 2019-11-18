@@ -83,7 +83,7 @@
             android:id="@+id/delete_product_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/delete_product_btn"
+            android:text="Delete Product"
             android:textAllCaps="false"
             android:textAlignment="center"
             android:textSize="18sp"
