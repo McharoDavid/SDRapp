@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +70,13 @@ public class SellerLoginActivity extends AppCompatActivity {
                                 intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
+                            }
+                            else{
+
+                                Toast.makeText(SellerLoginActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                Log.d("yoo", "Error: " + task.getException());
+                                loadingBar.dismiss();
+
                             }
                         }
                     });

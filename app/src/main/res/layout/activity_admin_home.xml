@@ -10,7 +10,7 @@
         android:id="@+id/admin_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_admin"
+        android:text="Welcome Admin"
         android:textAlignment="center"
         android:textSize="17dp"
         android:textColor="@color/colorPrimaryDark"
@@ -27,7 +27,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/maintain_products"
+        android:text="Maintain Products"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
@@ -41,7 +41,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/check_new_orders"
+        android:text="Check New Orders"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
@@ -55,7 +55,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/check_and_approve_new_products"
+        android:text="Check and Approve New Products"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
@@ -69,7 +69,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/admin_logout_btn"
+        android:text="Logout"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
