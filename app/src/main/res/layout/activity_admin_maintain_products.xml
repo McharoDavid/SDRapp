@@ -92,12 +92,5 @@
             android:background="@drawable/buttons"
             android:textColor="@color/white"/>
 
-
     </RelativeLayout>
-
-
-
-
-
-
 </androidx.cardview.widget.CardView>
