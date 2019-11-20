@@ -18,6 +18,7 @@
         <activity android:name=".Sellers.SellerRegistrationActivity" />
         <activity android:name=".Buyers.ResetPasswordActivity" />
         <activity android:name=".Admin.AdminMaintainProductsActivity" />
+        <activity android:name=".Sellers.SellerHomeActivity" />
         <activity android:name=".Buyers.SearchProductsActivity" />
         <activity android:name=".Admin.AdminUserProductsActivity" />
         <activity android:name=".Admin.AdminNewOrdersActivity" />
