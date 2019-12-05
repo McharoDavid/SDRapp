@@ -118,6 +118,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
+
         startActivityForResult(galleryIntent, GalleryPick);
 
     }
@@ -188,7 +189,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
 
         productRandomKey = saveCurrentDate + saveCurrentTime;
 
-        final StorageReference filepath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
+        final StorageReference filepath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpeg");
 
         final UploadTask uploadTask = filepath.putFile(ImageUri);
 
@@ -223,10 +224,14 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                         return filepath.getDownloadUrl();
 
 
+
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
+
+                        //This is was missing, therefore causing the imageNotDisplaying Error
+                        downloadImageUrl = task.getResult().toString();
 
                         if(task.isSuccessful()){
                             Toast.makeText(SellerAddNewProductActivity.this, "Got the Product Image Url Successfully.", Toast.LENGTH_SHORT).show();

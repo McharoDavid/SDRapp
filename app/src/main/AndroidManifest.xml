@@ -16,6 +16,7 @@
         <activity android:name=".Admin.AdminHomeActivity" />
         <activity android:name=".Sellers.SellerLoginActivity" />
         <activity android:name=".Sellers.SellerRegistrationActivity" />
+        <activity android:name=".Sellers.SellerHomeActivity" />
         <activity android:name=".Buyers.ResetPasswordActivity" />
         <activity android:name=".Admin.AdminMaintainProductsActivity" />
         <activity android:name=".Buyers.SearchProductsActivity" />
