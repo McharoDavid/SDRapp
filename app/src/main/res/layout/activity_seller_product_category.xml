@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Add New Product"
+        android:text="@string/add_new_product"
         android:textAlignment="center"
         android:textSize="26sp"
         android:textStyle="bold"/>

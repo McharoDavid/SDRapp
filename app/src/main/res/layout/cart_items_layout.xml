@@ -17,7 +17,7 @@
             android:id="@+id/cart_product_name"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:text="Product Name"
+            android:text="@string/product_name"
             android:textColor="@color/white"
             android:textSize="14dp"
             android:layout_marginLeft="5dp"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="5dp"
-            android:text="Product Quantity"
+            android:text="@string/product_quantity"
             android:textAlignment="viewEnd"
             android:textColor="@color/white"
             android:textSize="14dp"
@@ -42,7 +42,7 @@
             android:id="@+id/cart_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Product Price"
+            android:text="@string/product_price"
             android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold"
@@ -50,12 +50,5 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             />
-
-
     </RelativeLayout>
-
-
-
-
-
 </androidx.cardview.widget.CardView>

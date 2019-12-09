@@ -17,7 +17,7 @@
             android:id="@+id/page_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price = "
+            android:text="@string/total_price"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textAlignment="center"

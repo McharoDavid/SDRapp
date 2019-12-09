@@ -30,7 +30,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="User Name"
+        android:text="@string/user_name"
         android:gravity="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
