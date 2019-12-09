@@ -13,7 +13,7 @@
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please write your Shipment Details."
+        android:text="@string/shipment_details"
         android:textSize="18sp"
         android:textColor="@color/colorPrimaryDark"
         android:textAlignment="center"
@@ -28,7 +28,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Your Name"/>
+        android:hint="@string/your_name"/>
 
     <EditText
         android:id="@+id/shipment_phone_number"
@@ -39,7 +39,7 @@
         android:layout_marginLeft="20dp"
         android:inputType="number"
         android:layout_marginRight="20dp"
-        android:hint="Your Phone Number"/>
+        android:hint="@string/your_phone_number"/>
 
     <EditText
         android:id="@+id/shipment_address"
@@ -49,7 +49,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Your Shipment Address"/>
+        android:hint="@string/your_shipment_address"/>
 
     <EditText
         android:id="@+id/shipment_city"
@@ -59,7 +59,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Your Shipment City Name"/>
+        android:hint="@string/your_shipment_city_name"/>
 
     <Button
         android:id="@+id/confirm_final_order_btn"
@@ -67,10 +67,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="@dimen/confirm_order_text_size"
         android:background="@color/colorPrimaryDark"/>
 
 
